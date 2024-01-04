@@ -27,13 +27,24 @@ public class Paciente {
     private Endereco endereco;
     private Boolean ativo;
 
-
-    public Paciente(DadosCadastroPaciente dados){
+    public Paciente(DadosCadastroPaciente dados) {
         this.nome = dados.nome();
         this.email = dados.email();
         this.telefone = dados.telefone();
         this.cpf = dados.cpf();
-        this.endereco = dados.endereco();
+        this.endereco = new Endereco(dados.endereco());
         this.ativo = true;
+    }
+
+    public void atualizaInformacoes(DadosAtualizaPaciente paciente) {
+        if (paciente.nome() != null) {
+            this.nome = paciente.nome();
+        }
+        if (paciente.telefone() != null) {
+            this.telefone = paciente.telefone();
+        }
+        if (paciente.endereco() != null) {
+            this.endereco.atualizarInformacoes(paciente.endereco());
+        }
     }
 }
