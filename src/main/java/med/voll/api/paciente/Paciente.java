@@ -47,4 +47,8 @@ public class Paciente {
             this.endereco.atualizarInformacoes(paciente.endereco());
         }
     }
+
+    public void excluir(){
+        this.ativo = false;
+    }
 }
