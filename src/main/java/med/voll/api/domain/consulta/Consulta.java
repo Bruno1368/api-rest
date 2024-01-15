@@ -21,11 +21,11 @@ public class Consulta {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "medico_id")
+    @JoinColumn(name = "medico_id")//na tabela consultas poderão conter muitas linhas para um mesmo medico
     private Medico medico;
 
     @ManyToOne
-    @JoinColumn(name = "id_paciente")
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
     private LocalDateTime data;

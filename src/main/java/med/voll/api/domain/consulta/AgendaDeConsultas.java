@@ -37,6 +37,9 @@ public class AgendaDeConsultas {
 
         var paciente = pacienteRepository.getReferenceById(dados.idPaciente());
         var medico = escolherMedico(dados);
+        if (medico == null) {
+            throw new ValidacaoException("Não tem médico disponível no momento nesse horário");
+        }
         var consulta = new Consulta(null, medico, paciente, dados.data());
         consultaRepository.save(consulta);
 
@@ -52,6 +55,7 @@ public class AgendaDeConsultas {
         }
 
         return medicoRepository.escolherMedicoAleatorioLivreNaData(dados.especialidade(), dados.data());
+
     }
 
 }
