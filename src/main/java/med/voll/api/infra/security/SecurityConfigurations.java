@@ -28,8 +28,9 @@ public class SecurityConfigurations {
                  .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                  .authorizeHttpRequests(req -> {
                      req.requestMatchers(HttpMethod.POST, "/login").permitAll();
+                     req.requestMatchers( "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                      req.anyRequest().authenticated();
-                 }).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                 }).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)// chamando meu filtro antes do filtro do spring
                  .build();
 
     }
@@ -39,6 +40,7 @@ public class SecurityConfigurations {
         return configuration.getAuthenticationManager();
     }
 
+    //hash de senha utilizando o algoritmo bcrypt
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
